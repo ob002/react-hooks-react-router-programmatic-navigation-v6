@@ -1,6 +1,9 @@
+// src/pages/Login.jsx
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Login() {
+  const login = useOutletContext();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,32 +18,40 @@ function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
+    login(); // trigger login from App (navigates to "/")
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <label for="username">Username</label>
-      <div>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-      </div>
-      <label for="password">Password</label>
-      <div>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />      
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <main>
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <label htmlFor="username">Username</label>
+        <div>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <label htmlFor="password">Password</label>
+        <div>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+    </main>
   );
 }
 
